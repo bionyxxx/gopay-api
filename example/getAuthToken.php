@@ -1,7 +1,7 @@
 <?php 
 require('../src/GojekPay.php');
 
-use Namdevel\GojekPay;
+use Dutta\GojekPay;
 
 $gopay = new GojekPay();
 /** 

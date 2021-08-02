@@ -12,11 +12,14 @@ Compliant with the june 06, 2021 Gojek API update.
 
 Installation
 ------------
+
 ```
-composer require namdevel/gopay-api
+composer require dutta/gopay-api
 ```
+
 Features
 ------------
+
 - [x] LoginRequest
 - [x] getAccessToken
 - [x] transferGopay

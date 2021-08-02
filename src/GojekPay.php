@@ -1,6 +1,6 @@
 <?php
 
-namespace Namdevel;
+namespace Dutta;
 /**
  * [Gojek] Gopay Api PHP Class (Un-Official)
  * Author : namdevel <https://github.com/namdevel>
