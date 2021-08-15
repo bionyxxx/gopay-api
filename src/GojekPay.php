@@ -124,7 +124,7 @@ class GojekPay
         $payload = array(
             'amount' => array(
                 'currency' => 'IDR',
-                'value' => $amount
+                'value' => (int)$amount
             ),
             'description' => '💰',
             'metadata' => array(
