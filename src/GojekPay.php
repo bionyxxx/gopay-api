@@ -29,16 +29,11 @@ class GojekPay
     public function __construct($authToken = false, $sessionId = null, $uniqueId = null)
     {
         if ($sessionId and $uniqueId){
-            $this->sessionId = $sessionId; // generated from self::uuidv4();
-            $this->uniqueId = $uniqueId; // generated from self::uuidv4();
-        } else {
-            $this->sessionId = 'A78354AB-9578-4FF5-B899-4BA6BA16488E'; // generated from self::uuidv4();
-            $this->uniqueId = 'A23194EB-8C6F-45B7-8A80-2606BA847DD8'; // generated from self::uuidv4();
-        }
+            $this->sessionId = $sessionId; // generated from uuidv4();
+            $this->uniqueId = $uniqueId; // generated from uuidv4();
+        } 
 
-        if ($authToken) {
-            $this->authToken = $authToken;
-        }
+        $this->authToken = $authToken;
     }
 
     protected function setPinGojek($pin)
@@ -175,7 +170,7 @@ class GojekPay
         return substr_replace($phoneNumber, $areacode, 0, 1);
     }
 
-    public function uuidv4()
+    public static function uuidv4()
     {
         $data = random_bytes(16);
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
