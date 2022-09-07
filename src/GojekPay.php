@@ -1,39 +1,39 @@
 <?php
 
-namespace Dutta;
+namespace Namdevel;
 /**
  * [Gojek] Gopay Api PHP Class (Un-Official)
  * Author : namdevel <https://github.com/namdevel>
  * Created at 22-04-2020 14:26
- * Last Modified at 06-06-2021 02:37
+ * Last Modified at 08-09-2021 08:24
  */
 class GojekPay
 {
     const API_URL = 'https://api.gojekapi.com';
     const API_GOID = 'https://goid.gojekapi.com';
     const API_CUSTOMER = 'https://customer.gopayapi.com';
+
     const clientId = 'gojek:consumer:app';
     const clientSecret = 'pGwQ7oi8bKqqwvid09UrjqpkMEHklb';
     const appId = 'com.go-jek.ios';
     const phoneModel = 'Apple, iPhone XS Max';
     const phoneMake = 'Apple';
-    const osDevice = 'iOS, 14.4.2';
+    const osDevice = 'iOS, 14.8.1';
     const xPlatform = 'iOS';
-    const appVersion = '4.20.1';
+    const appVersion = '4.38.1';
     const gojekCountryCode = 'ID';
-    const userAgent = 'Gojek/4.20.1 (com.go-jek.ios; build:15832942; iOS 14.4.2) Alamofire/4.20.1';
+    const userAgent = 'Gojek/4.38.1 (com.go-jek.ios; build:24785490; iOS 14.4.0) Alamofire/4.38.1';
 
-    private $authToken, $pin, $idKey;
-    public $uniqueId, $sessionId;
+    private $authToken, $pin, $idKey, $uniqueId, $sessionId;
 
-    public function __construct($authToken = false, $sessionId = null, $uniqueId = null)
+    public function __construct($sessionId, $uniqueId, $authToken = false)
     {
-        if ($sessionId and $uniqueId){
-            $this->sessionId = $sessionId; // generated from uuidv4();
-            $this->uniqueId = $uniqueId; // generated from uuidv4();
-        } 
+        if ($authToken) {
+            $this->authToken = $authToken;
+        }
 
-        $this->authToken = $authToken;
+        $this->sessionId = $sessionId; // generated from uuidv4();
+        $this->uniqueId = $uniqueId; // generated from uuidv4();
     }
 
     protected function setPinGojek($pin)
@@ -113,13 +113,13 @@ class GojekPay
         return self::getResponse(self::isGojek($phoneNumber), 'qr_id');
     }
 
-    public function transferGopay($phoneNumber, $amount, $pin)
+    public function transferGopay($phoneNumber, int $amount, $pin)
     {
         self::setPinGojek($pin);
         $payload = array(
             'amount' => array(
                 'currency' => 'IDR',
-                'value' => (int)$amount
+                'value' => $amount
             ),
             'description' => '💰',
             'metadata' => array(
@@ -139,7 +139,7 @@ class GojekPay
         return self::Request(self::API_CUSTOMER . "/v1/banks?type=transfer&show_withdrawal_block_status=false", false, true);
     }
 
-    public function transferBank($bankCode, $bankNumber, $amount, $pin)
+    public function transferBank($bankCode, $bankNumber, int $amount, $pin)
     {
         self::setIdKey();
         $bankAccountName = self::getResponse(self::isBank($bankCode, $bankNumber), 'account_name');
@@ -165,12 +165,12 @@ class GojekPay
         return self::Request(self::API_CUSTOMER . "/v1/bank-accounts/validate?bank_code={$bankCode}&account_number={$bankNumber}", false, true);
     }
 
-    public function formatPhone($phoneNumber, $areacode = '')
+    protected function formatPhone($phoneNumber, $areacode = '')
     {
         return substr_replace($phoneNumber, $areacode, 0, 1);
     }
 
-    public static function uuidv4()
+    public function uuidv4()
     {
         $data = random_bytes(16);
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40);

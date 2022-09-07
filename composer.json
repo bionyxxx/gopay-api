@@ -14,5 +14,8 @@
             "email": "namdevel@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-curl": "*",
+      "ext-json": "*"
+    }
 }

@@ -3,3 +3,4 @@ packer_cache/
 .idea
 # For built boxes
 *.box
+vendor
