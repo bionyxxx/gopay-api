@@ -170,7 +170,7 @@ class GojekPay
         return substr_replace($phoneNumber, $areacode, 0, 1);
     }
 
-    public function uuidv4()
+    public static function uuidv4()
     {
         $data = random_bytes(16);
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
