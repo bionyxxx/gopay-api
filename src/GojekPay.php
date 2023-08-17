@@ -32,7 +32,7 @@ class GojekPay
     {
         $this->sessionId = 'CA877566-FE98-4480-B942-B319EBA7E599'; // generated from self::uuidv4();
         $this->uniqueId  = 'FBAA2A4C-749E-48C0-95B5-CC6FE79A6FC1'; // generated from self::uuidv4();
-
+        // generate id https://onecompiler.com/php/3zhsacjgc
         if ($authToken) {
             $this->authToken = $authToken;
         }
