@@ -30,8 +30,8 @@ class GojekPay
 
     public function __construct($authToken = false)
     {
-        $this->sessionId = '786C2BF4-A6A1-498D-8906-1B8064D58156'; // generated from self::uuidv4();
-        $this->uniqueId  = '0D8C6014-F646-43A8-ADFB-F9A2416C1B28'; // generated from self::uuidv4();
+        $this->sessionId = 'CA877566-FE98-4480-B942-B319EBA7E599'; // generated from self::uuidv4();
+        $this->uniqueId  = 'FBAA2A4C-749E-48C0-95B5-CC6FE79A6FC1'; // generated from self::uuidv4();
 
         if ($authToken) {
             $this->authToken = $authToken;
